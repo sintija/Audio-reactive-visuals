@@ -8,7 +8,7 @@ spectrum, volume, progress,
 playButton, lines
 
 function preload() {
-  audio = loadSound('../../../audio/03.mp3')
+  audio = loadSound('../../../audio/04.mp3')
 }
 
 function setup() {

@@ -1,19 +1,22 @@
-let audio, fft, peakDetect, bgColor = 0
+let audio, fft, binWidth, peakDetect
+let bgColor = 0
 
 // FFT analysis resolution.
 // Must be a power of two between 16 and 1024.
 const bins = 64
 
-// Frequency ranges.
 
-// bass = [20, 140]
-// lowMid = [140, 400]
-// mid = [400, 2600]
-// highMid = [2600, 5200]
-// treble = [5200, 14000]
+//Frequency ranges 
+
+// this.bass = [20, 140]
+// this.lowMid = [140, 400]
+// this.mid = [400, 2600]
+// this.highMid = [2600, 5200]
+// this.treble = [5200, 14000]
+
 
 function preload() {
-  audio = loadSound('../../../audio/03.mp3')
+  audio = loadSound('../../../audio/02.mp3')
 }
 
 function setup() {
@@ -22,25 +25,32 @@ function setup() {
 
   fft = new p5.FFT()
 
-  peakDetect = new p5.PeakDetect(140, 400, 0.8)
+ 
+
+  peakDetect = new p5.PeakDetect(140,400,0.7)
   peakDetect.onPeak(peakDetected)
+
+  // The size of each rectangle.
+  binWidth = width / bins
 }
 
+
+
 function draw() {
-  background(bgColor)
+  background(0)
+  noStroke()
 
   fft.analyze(bins)
 
-  // The PeakDetect object, needs to be updated, 
-  // after the fft.analyze() method. 
   peakDetect.update(fft)
+
+
 }
 
+//callback function to check whenever the beat is detected 
 function peakDetected() {
-  console.log('Peak Detected')
-
-  // Set a random color on all 3 RGB channels.
-  bgColor = color(random(255), random(255), random(255))
+  //console.log('Peak Detected')
+  bgColor  = color(random(255), random(255), random(255))
 }
 
 function togglePlay() {
