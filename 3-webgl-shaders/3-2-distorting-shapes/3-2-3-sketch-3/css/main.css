@@ -1,0 +1,33 @@
+body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: white;
+}
+
+.text {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 90001;
+  font-size: 25vh;
+  line-height: 0.8;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+span {
+  display: block;
+}
+
+#fullscreen {
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 2vw;
+  cursor: pointer;
+}
