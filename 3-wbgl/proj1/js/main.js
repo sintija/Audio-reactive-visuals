@@ -1,10 +1,11 @@
-let myShaders, fft
+let myShaders, audio, amp, fft
 
 function preload() {
-  myShaders = loadShader('shaders/vertex.vert', 'shaders/fragment.frag')
-  const audio = loadSound('../../../audio/01.mp3')
-}
 
+  myShaders = loadShader('shaders/vertex.vert', 'shaders/fragment.frag')
+
+  audio = loadSound('../../../audio/0.mp3')
+}
 
 function setup() {
   const canvas = createCanvas(windowWidth, windowHeight, WEBGL)
@@ -12,7 +13,7 @@ function setup() {
   
   shader(myShaders)
   
-  const amp = new p5.Amplitude()
+  amp = new p5.Amplitude()
   fft = new p5.FFT()
 }
 
@@ -24,11 +25,12 @@ function draw() {
   const volume = amp.getLevel() // 0 - 1
   
   // Spectral Centroid Frequency of the spectral centroid in Hz.
+  //most prominent frequency of the track
   let freq = fft.getCentroid() 
   freq *= 0.001
 
-  const mapF = map(freq, 0, 1, 0, 20)
-  const mapA = map(volume, 0, 0.2, 0, 0.5)
+  const mapF = map(freq, 0, 1, 0, 25)
+  const mapA = map(volume, 0, 100, 0, 100)
   
   myShaders.setUniform('uTime', frameCount)
   

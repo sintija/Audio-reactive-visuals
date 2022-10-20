@@ -1,10 +1,9 @@
-let myShaders, fft
+let myShaders, audio, amp, fft
 
 function preload() {
   myShaders = loadShader('shaders/vertex.vert', 'shaders/fragment.frag')
-  const audio = loadSound('../../../audio/01.mp3')
+  audio = loadSound('../../../audio/01.mp3')
 }
-
 
 function setup() {
   const canvas = createCanvas(windowWidth, windowHeight, WEBGL)
@@ -12,8 +11,10 @@ function setup() {
   
   shader(myShaders)
   
-  const amp = new p5.Amplitude()
+  amp = new p5.Amplitude()
   fft = new p5.FFT()
+  
+  audio.play()
 }
 
 function draw() {
@@ -35,7 +36,8 @@ function draw() {
   myShaders.setUniform('uFrequency', mapF)
   myShaders.setUniform('uAmp', mapA)
 
-  sphere(width / 8, 200, 200)
+  // sphere(width / 4, 200, 200)
+  sphere(width / 7, 200, 200)
 }
 
 function togglePlay() {
