@@ -25,32 +25,27 @@ function setup() {
 
   fft = new p5.FFT()
 
- 
 
-  peakDetect = new p5.PeakDetect(140,400,0.7)
+
+  peakDetect = new p5.PeakDetect(140, 400, 0.7)
   peakDetect.onPeak(peakDetected)
 
   // The size of each rectangle.
   binWidth = width / bins
 }
 
-
-
 function draw() {
   background(0)
   noStroke()
 
   fft.analyze(bins)
-
   peakDetect.update(fft)
-
-
 }
 
 //callback function to check whenever the beat is detected 
 function peakDetected() {
   //console.log('Peak Detected')
-  bgColor  = color(random(255), random(255), random(255))
+  bgColor = color(random(255), random(255), random(255))
 }
 
 function togglePlay() {
@@ -62,5 +57,5 @@ function togglePlay() {
 }
 
 function windowResized() {
-	resizeCanvas(windowWidth, windowHeight)
+  resizeCanvas(windowWidth, windowHeight)
 }
